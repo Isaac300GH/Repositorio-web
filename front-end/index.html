@@ -5,50 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repositorio JMG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/index1.css">
 </head>
 
 <body>
+
     <header>
         <!-- Navigation Menu -->
-        <nav>
-            <ul class="top-menu">
+        <nav class="nav-princ">
+            <ul class="nav-princ__opc-princ">
                 <li><a href="html/comopublicar.html">Cómo publicar</a></li>
                 <li><a href="html/login.html">Inicio de sesión</a></li>
             </ul>
+            <div class="nav-princ__menu">
+                <button class="menu-button">-</button>
+                <div class="nav-princ__menu--menu-content">
+                    <!--<a href="#home">Inicio</a>-->
+                    <ul>
+                        <li><a href="#about">Acerca de</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                        <li><a href="#help">Ayuda</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
-        
         <!-- Logo and Title -->
         <div class="header-content">
             <img src="imagenes/LOGO ISAAC JMG titulo blanco.png" height="400" alt="Escudo JMG">
-            <h1>REPOSITORIO WEB DE PROYECTOS DE LA UNIDAD EDUCATIVA TÉCNICA HUMANISTICO JOSEFA MANUELA GANDARILLAS</h1>
+            <div class="header-content__titulo">
+                <h1>REPOSITORIO WEB DE PROYECTOS DE LA UNIDAD EDUCATIVA TÉCNICA HUMANISTICO JOSEFA MANUELA GANDARILLAS</h1>
+                <!-- Search Bar -->
+                <div class="buscador">
+                    <input type="search" placeholder="Búsqueda...">
+                    <button type="submit">Buscar</button> <br>
+                    <a href="#opcava">Opciones avanzadas</a>
+                </div>
+            </div>
         </div>
-        <!-- Search Bar -->
-        <div class="buscador">
-            <input type="search" placeholder="Búsqueda...">
-            <button type="submit">Buscar</button> <br>
-            <a href="#opcava">Opciones avanzadas</a>
-        </div>
-
     </header>
-
-    <h2>INICIO / REPOSITORIO ACADÉMICO</h2>
+    <main>
+        <h2>INICIO / REPOSITORIO ACADÉMICO</h2>
+        
+        <!-- Main Content Section -->
+        <div class="content">
+            <h3>Informes</h3>
+            <h2>DESCUBRE</h2>
+            <div class="descubre"></div>
+        </div>
     
-    <!-- Main Content Section -->
-    <div class="content">
-        <h3>Informes</h3>
-        <h2>DESCUBRE</h2>
-        <div class="descubre"></div>
-    </div>
-
-    <!-- Navigation Links -->
-    <nav>
-        <ul class="bottom-menu">
-            <li><a href="html/Autores.html">AUTORES</a></li>
-            <li><a href="html/Temas.html">TEMAS</a></li>
-            <li><a href="html/Gestiones.html">GESTIONES</a></li>
-        </ul>
-    </nav>
+        <!-- Navigation Links -->
+        <nav>
+            <ul class="opc-busq">
+                <li><a href="html/Autores.html">AUTORES</a></li>
+                <li><a href="html/Temas.html">TEMAS</a></li>
+                <li><a href="html/Gestiones.html">GESTIONES</a></li>
+            </ul>
+        </nav>
+    </main>
 </body>
 
 </html>

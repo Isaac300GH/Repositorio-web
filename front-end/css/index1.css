@@ -1,134 +1,48 @@
-/* General body styles */
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "SUSE", sans-serif;
+    font-weight: 100;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
-
-/* Header styles */
 header {
-    background: linear-gradient(333deg, rgba(0,39,118,1) 0%, rgba(0,17,50,1) 38%, rgba(138,0,82,1) 100%);
+    background: radial-gradient(at top left, rgba(138,0,82,1) 0%, rgba(0,17,50,1) 50%, rgba(0,39,118,1) 100%);
+    min-height: 100vh;
     color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px; /* Limiting width for better layout control */
-    margin: 0 auto; /* Center the content on the page */
-}
-header img {
-    margin-right: 20px; /* Space between logo and text */
-}
-
-header h1 {
-    font-size: 50px;
-    margin: 0;
-    margin-left: 100px;
-    text-align: left;
-}
-
-/* Navigation menu */
-nav {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.top-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.top-menu li {
-    display: inline;
-    margin-right: 20px;
-}
-
-.top-menu li a {
-    color: white;
-    text-decoration: none;
-}
-
-.bottom-menu {
-    list-style: none;
-    margin: 20px;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.bottom-menu li {
-    margin-right: 30px;
-}
-
-.bottom-menu li a {
-    color: rgba(0, 39, 118, 1);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Search bar styles */
-.buscador {
-    display: inline-block;
-    align-items: center;
-    margin-top: 0;
-    margin-left: 150px;
-}
-
-.buscador input {
-    background-color: transparent;
     padding: 10px;
-    width: 500px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
 }
-
-.buscador button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: 0;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
+[alt="Escudo JMG"]{
+    height: 75vh
 }
-
-.buscador button:hover {
-    background-color: #083658;
+.header-content__titulo{
+    text-align: left;
+    display: inline-block;
+    width: 40%;
+    margin-left: 100px;
+    position: relative;
+    top: -17vh;
 }
-
-.buscador a {
-    color: white;
-    text-decoration: none;
+h1{
+    margin-top: 0;
+    margin-bottom: 50px
 }
-
-/* Content section */
-.content {
-    padding: 40px;
+.header-content{
+    margin-top: 12.5vh;
     text-align: center;
+    width: 100%;
 }
-
-.content h3 {
-    margin-bottom: 10px;
-}
-
-.descubre {
-    height: 200px;
-    background-color: #ddd;
-    border-radius: 10px;
-}
-
-/* General text and link styles */
-a {
-    color: white;
+header a{
     text-decoration: none;
+    font-size: 1.1em;
+    color: white;
+    font-weight: 200;
+    font-family: "SUSE", sans-serif;
 }
+.nav-princ{
+    position: absolute;
+    right: 0;
+}
+.nav-princ li{
+    display: inline;
 
-h2 {
-    font-size: 18px;
-    color: #0b4870;
 }
