@@ -41,8 +41,31 @@ header a{
 .nav-princ{
     position: absolute;
     right: 0;
+    padding-right: 20px;
 }
 .nav-princ li{
     display: inline;
+    margin: 0 10px;
 
+}
+.buscador input{
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px;
+}
+[type="search"]{
+    width: 70%;
+}
+[type="submit"]:hover{
+    border: 1px solid grey;
+}
+[type="submit"]:active{
+    border: 1px solid grey;
+    background-color: rgba(0, 0, 255, 0.13);
+}
+.nav-princ__opc-princ, .nav-princ__menu{
+    display: inline-block;
 }
