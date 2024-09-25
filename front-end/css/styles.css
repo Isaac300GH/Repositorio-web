@@ -34,7 +34,7 @@ header a:hover{
     width: 100%;
     position: sticky;
     top: 0;
-    background-color: black;
+    background-color: transparent;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
