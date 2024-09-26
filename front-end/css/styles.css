@@ -34,7 +34,7 @@ header a:hover{
     width: 100%;
     position: sticky;
     top: 0;
-    background-color: transparent;
+    background-color: black;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -52,6 +52,7 @@ header a:hover{
     list-style: none;
     margin: 15px;
 }
+
 [alt="Escudo JMG"]{
     height: 70vh;
 }
@@ -85,4 +86,36 @@ header a:hover{
 }
 [type="search"]::placeholder{
     color: white;
+}
+@media only screen and (max-width:768px){
+    .header-content{
+        align-content: center;
+    }       
+    [alt="Escudo JMG"]{
+        height: auto;
+        width: 75vw;
+    }
+    .nav-princ__menu{
+        display: none;
+        flex-wrap: wrap;
+    }
+    .nav-princ .buscador{
+        display: none;
+    }
+    #home{
+        width: 70vw;
+        /*
+        display: none;
+        */
+    }
+    h1{
+        font-size: 4vh;
+    }
+    .header-content__titulo{
+        text-align: center;
+        flex-basis: 100vw;
+    }
+}
+@media only screen and (max-width ){
+    
 }

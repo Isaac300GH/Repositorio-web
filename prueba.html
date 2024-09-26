@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Hamburguesa</title>
+  <style>
+    /* Estilo básico para el contenedor */
+    .hamburger-menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 35px;    /* Ancho del menú */
+      height: 30px;   /* Alto del menú */
+      cursor: pointer;
+    }
+
+    /* Estilo para las líneas del icono */
+    .hamburger-menu div {
+      width: 100%;     /* Ancho completo del contenedor */
+      height: 4px;     /* Altura de cada barra */
+      background-color: #333;  /* Color de las barras */
+      border-radius: 5px;  /* Bordes redondeados */
+      transition: all 0.3s ease;  /* Transición suave al interactuar */
+    }
+
+    /* Efecto cuando el menú esté activo (puede simularse con clases en JavaScript) */
+    .hamburger-menu.active div:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+
+    .hamburger-menu.active div:nth-child(2) {
+      opacity: 0;  /* Oculta la barra del medio */
+    }
+
+    .hamburger-menu.active div:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menú hamburguesa -->
+  <div class="hamburger-menu">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </div>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger-menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
