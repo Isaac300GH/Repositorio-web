@@ -54,7 +54,8 @@ header a:hover{
 }
 
 [alt="Escudo JMG"]{
-    height: 70vh;
+    max-height: 70vh;
+    padding: 0 50px;
 }
 .header-content__titulo{
     width: 45%;
@@ -63,7 +64,7 @@ header a:hover{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-items: center;
+    align-content: center;
     height: 90vh;
 }
 .buscador a{
@@ -93,7 +94,7 @@ header a:hover{
     }       
     [alt="Escudo JMG"]{
         height: auto;
-        width: 75vw;
+        max-width: 75vw;
     }
     .nav-princ__menu{
         display: none;
