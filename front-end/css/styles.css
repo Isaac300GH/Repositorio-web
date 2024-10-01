@@ -18,6 +18,13 @@ header a{
 header a:hover{
     color: coral;
 }
+.buscador{
+    display: flex;
+    flex-wrap: wrap;
+}
+[type="search"]{
+    flex-grow: 1;
+}
 #home{
     width: 25vw;
     /*
@@ -55,20 +62,20 @@ header a:hover{
 
 [alt="Escudo JMG"]{
     max-height: 70vh;
-    padding: 0 50px;
 }
 .header-content__titulo{
     width: 45%;
 }
 .header-content{
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     justify-content: space-evenly;
-    align-content: center;
+    align-items: center;
     height: 90vh;
 }
 .buscador a{
     margin-left: 10px;
+    flex-basis: 100%;
 }
 .buscador input{
     background-color: transparent;
@@ -82,13 +89,13 @@ header a:hover{
     border: solid coral 2px;
     color: coral;
 }
-[type="search"]{
-    width: 70%;
-}
 [type="search"]::placeholder{
     color: white;
 }
 @media only screen and (max-width:768px){
+    header{
+        min-height: 110vh;
+    }
     .header-content{
         align-content: center;
     }       
@@ -114,9 +121,6 @@ header a:hover{
     }
     .header-content__titulo{
         text-align: center;
-        flex-basis: 100vw;
+        flex-basis: 95vw;
     }
-}
-@media only screen and (max-width ){
-    
 }
