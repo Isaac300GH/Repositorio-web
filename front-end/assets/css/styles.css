@@ -85,7 +85,7 @@ header a:hover{
     padding: 5px 10px;
     margin-bottom: 10px;
 }
-.buscador input:hover, input:focus{
+.buscador input:hover, [type="search"]:focus{
     border: solid coral 2px;
     color: coral;
 }
