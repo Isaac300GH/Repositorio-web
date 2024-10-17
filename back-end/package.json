@@ -1,0 +1,24 @@
+{
+  "name": "repositorio-jmg",
+  "version": "1.0.0",
+  "description": "El backend del repositorio web proporciona la infraestructura necesaria para almacenar, gestionar y consultar los proyectos de titulación de los estudiantes de la Unidad Educativa Técnico Humanístico Josefa Manuela Gandarillas. Se encarga de procesar las solicitudes del cliente (frontend) y acceder a la base de datos para realizar operaciones como la creación, lectura, actualización y eliminación (CRUD) de los registros de proyectos. Utilizando Node.js como plataforma de servidor, este backend asegura una comunicación eficiente entre la interfaz de usuario y el almacenamiento de la información, garantizando que los proyectos estén disponibles para consulta en todo momento de manera organizada y segura.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Isaac300GH/Repositorio-web.git"
+  },
+  "author": "Isaac Matias Gonzales Ortiz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Isaac300GH/Repositorio-web/issues"
+  },
+  "homepage": "https://github.com/Isaac300GH/Repositorio-web#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
