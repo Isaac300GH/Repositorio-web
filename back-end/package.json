@@ -20,5 +20,8 @@
   "homepage": "https://github.com/Isaac300GH/Repositorio-web#readme",
   "devDependencies": {
     "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
   }
 }
