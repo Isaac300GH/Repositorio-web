@@ -3,8 +3,16 @@ const Proyecto = require('../models/Proyecto');
 // Crear un nuevo proyecto
 const crearProyecto = async (req, res) => {
     try {
-        const nuevoProyecto = new Proyecto(req.body);
+        const proyectoData = req.body;
+
+        // Procesar archivo PDF
+        if (req.file) {
+            proyectoData.pdfUrl = `${process.env.SERVER_URL}/uploads/${req.file.filename}`; // Guarda la URL del archivo PDF
+        }
+
+        const nuevoProyecto = new Proyecto(proyectoData);
         const proyectoGuardado = await nuevoProyecto.save();
+
         res.status(201).json(proyectoGuardado);
     } catch (error) {
         res.status(400).json({ mensaje: error.message });
@@ -48,6 +56,10 @@ const eliminarProyecto = async (req, res) => {
     try {
         const proyecto = await Proyecto.findByIdAndDelete(req.params.id);
         if (!proyecto) return res.status(404).json({ mensaje: 'Proyecto no encontrado' });
+        if (proyecto.pdfUrl) {
+            const filePath = path.join(__dirname, '..', 'uploads', path.basename(proyecto.pdfUrl));
+            fs.unlinkSync(filePath); // Elimina el archivo PDF del servidor si existe
+        }
         res.json({ mensaje: 'Proyecto eliminado correctamente' });
     } catch (error) {
         res.status(500).json({ mensaje: error.message });

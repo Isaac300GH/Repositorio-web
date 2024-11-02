@@ -31,7 +31,8 @@ const proyectoSchema = new mongoose.Schema({
     categorias: [{
         type: String,
         required: true
-    }]
+    }],
+    pdfUrl: String // Añade un campo para la URL del PDF
 });
 
 const Proyecto = mongoose.model('Proyecto', proyectoSchema);

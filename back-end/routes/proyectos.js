@@ -7,11 +7,11 @@ const {
     eliminarProyecto
 } = require('../controllers/proyectosController');
 const protegerRuta = require('../middleware/authMiddleware');
-
+const uploads = require('../config/multer');
 const router = express.Router();
 
 // Ruta para crear un proyecto (solo admin)
-router.post('/', protegerRuta, crearProyecto);
+router.post('/', protegerRuta, uploads.single('file'), crearProyecto);
 
 // Ruta para obtener todos los proyectos (todos)
 router.get('/', obtenerProyectos);

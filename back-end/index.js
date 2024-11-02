@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config(); // Carga las variables del archivo .env
 
@@ -13,6 +14,9 @@ app.use(express.json());
 
 // Conexión a MongoDB
 connectDB();
+
+// Servir archivos estáticos
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Rutas de autenticación
 app.use('/auth', authRoutes);
