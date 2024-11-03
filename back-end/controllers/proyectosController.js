@@ -56,10 +56,6 @@ const eliminarProyecto = async (req, res) => {
     try {
         const proyecto = await Proyecto.findByIdAndDelete(req.params.id);
         if (!proyecto) return res.status(404).json({ mensaje: 'Proyecto no encontrado' });
-        if (proyecto.pdfUrl) {
-            const filePath = path.join(__dirname, '..', 'uploads', path.basename(proyecto.pdfUrl));
-            fs.unlinkSync(filePath); // Elimina el archivo PDF del servidor si existe
-        }
         res.json({ mensaje: 'Proyecto eliminado correctamente' });
     } catch (error) {
         res.status(500).json({ mensaje: error.message });

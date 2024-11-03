@@ -7,11 +7,12 @@ const {
     eliminarProyecto
 } = require('../controllers/proyectosController');
 const protegerRuta = require('../middleware/authMiddleware');
+const verificarRol = require('../middleware/verificarPermisos');
 const uploads = require('../config/multer');
 const router = express.Router();
 
 // Ruta para crear un proyecto (solo admin)
-router.post('/', protegerRuta, uploads.single('file'), crearProyecto);
+router.post('/', protegerRuta, verificarRol(["admin"]), uploads.single('file'), crearProyecto);
 
 // Ruta para obtener todos los proyectos (todos)
 router.get('/', obtenerProyectos);
@@ -20,9 +21,9 @@ router.get('/', obtenerProyectos);
 router.get('/:id', obtenerProyecto);
 
 // Ruta para actualizar un proyecto por ID (profesores y admin)
-router.put('/:id', protegerRuta, actualizarProyecto);
+router.put('/:id', protegerRuta, verificarRol(["admin", "profesor"]), actualizarProyecto);
 
 // Ruta para eliminar un proyecto por ID (solo admin)
-router.delete('/:id', protegerRuta, eliminarProyecto);
+router.delete('/:id', protegerRuta, verificarRol(["admin"]), eliminarProyecto);
 
 module.exports = router;
