@@ -1,0 +1,155 @@
+
+/* Para pantallas más grandes, como computadoras de escritorio pequeñas (769px a 1024px) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    #img_encabezado img {
+        width: 80px;
+    }
+
+    .buscador input[type="search"] {
+        width: 300px;
+    }
+
+    .links li {
+        margin-right: 1.5rem;
+    }
+    header {
+        background-color: #000; /* Fondo negro */
+        color: white;
+        padding: 6.5rem 1rem;
+    }
+    
+    .contenedor_header {
+        display: flex;
+        align-items:  top center;
+        justify-content: space-between;
+    }
+    
+    /* Logo alineado a la izquierda */
+    #img_encabezado img {
+        width: 600px;
+    }
+    
+    /* Estilo del buscador en el centro */
+    .buscador {
+        display: flex;
+        align-items: center;
+        gap: 4.5rem;
+    }
+    
+    .buscador input[type="search"] {
+        padding: 0.5rem;
+        border: none;
+        border-radius: 4px;
+    }
+    
+    .buscador input[type="submit"] {
+        padding: 0.5rem 1rem;
+        background-color: #000000;
+        border: none;
+        color: rgb(0, 0, 0);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    /* Navegación alineada a la derecha */
+    .links {
+        display: flex;
+        list-style: none;
+        gap: 1rem;
+    }
+    
+    .links li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+} 
+
+ /* Estilos generales para el header */
+header {
+    background-color: #000;
+    color: rgb(0, 0, 0);
+    padding: 3rem 0.5rem;
+    position: fixed; /* Hace que el header se mantenga fijo */
+    top: 0;
+    left: 0;
+    width: 100%; /* Se asegura de que el header ocupe todo el ancho de la pantalla */
+    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra para distinguir el header */
+}
+
+/* Para dar un espacio superior en el contenido después del header */
+body {
+    padding-top: 100px; /* Ajusta esto según la altura del header */
+}
+
+.contenedor_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Logo más grande */
+#img_encabezado img {
+    width: 100%;
+    height: 200;
+}
+
+/* Buscador alineado horizontalmente */
+.buscador {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.buscador input[type="search"] {
+    width: 500px;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    font-size: 1.2rem;
+}
+
+.buscador input[type="submit"] {
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    border: none;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.opc_avanzadas {
+    color: #ccc;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.opc_avanzadas:hover {
+    color: #fff;
+}
+
+/* Navegación alineada a la derecha con más espacio */
+.links {
+    display: flex;
+    list-style: none;
+    gap: 4rem;
+}
+
+.links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
