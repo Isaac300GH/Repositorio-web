@@ -20,8 +20,9 @@
 
 #img_encabezado img {
     width: 100%;
-    max-width: 250px;
+    max-width: 10px; /* Reduce el tamaño máximo de la imagen a más de la mitad */
     margin: auto;
+    flex-direction: initial;
 }
 
 /* Buscador alineado horizontalmente */
