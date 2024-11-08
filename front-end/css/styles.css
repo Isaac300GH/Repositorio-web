@@ -1,155 +1,445 @@
-
-/* Para pantallas más grandes, como computadoras de escritorio pequeñas (769px a 1024px) */
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-    #img_encabezado img {
-        width: 80px;
-    }
-
-    .buscador input[type="search"] {
-        width: 300px;
-    }
-
-    .links li {
-        margin-right: 1.5rem;
-    }
-    header {
-        background-color: #000; /* Fondo negro */
-        color: white;
-        padding: 6.5rem 1rem;
-    }
-    
-    .contenedor_header {
-        display: flex;
-        align-items:  top center;
-        justify-content: space-between;
-    }
-    
-    /* Logo alineado a la izquierda */
-    #img_encabezado img {
-        width: 600px;
-    }
-    
-    /* Estilo del buscador en el centro */
-    .buscador {
-        display: flex;
-        align-items: center;
-        gap: 4.5rem;
-    }
-    
-    .buscador input[type="search"] {
-        padding: 0.5rem;
-        border: none;
-        border-radius: 4px;
-    }
-    
-    .buscador input[type="submit"] {
-        padding: 0.5rem 1rem;
-        background-color: #000000;
-        border: none;
-        color: rgb(0, 0, 0);
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    
-    /* Navegación alineada a la derecha */
-    .links {
-        display: flex;
-        list-style: none;
-        gap: 1rem;
-    }
-    
-    .links li a {
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.9rem;
-    }
-} 
-
- /* Estilos generales para el header */
-header {
-    background-color: #000;
-    color: rgb(0, 0, 0);
-    padding: 3rem 0.5rem;
-    position: fixed; /* Hace que el header se mantenga fijo */
-    top: 0;
-    left: 0;
-    width: 100%; /* Se asegura de que el header ocupe todo el ancho de la pantalla */
-    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra para distinguir el header */
-}
-
-/* Para dar un espacio superior en el contenido después del header */
-body {
-    padding-top: 100px; /* Ajusta esto según la altura del header */
+/* Estilos generales para el header */
+.primer_vistazo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #0057b7;
+    color: white;
+    width: 100%;
 }
 
 .contenedor_header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 4rem;
-    max-width: 1600px;
-    margin: 0 auto;
+    gap: 1rem;
+    max-width: 1200px;
+    width: 100%;
 }
 
-/* Logo más grande */
 #img_encabezado img {
     width: 100%;
-    height: 200;
+    max-width: 250px;
+    margin: auto;
 }
 
 /* Buscador alineado horizontalmente */
 .buscador {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
+    width: 80%;
+    max-width: 700px;
 }
 
 .buscador input[type="search"] {
-    width: 500px;
+    width: 100%;
     padding: 1rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 10px 0 0 10px;
     background-color: white;
-    color: black;
-    font-size: 1.2rem;
+    color: #333;
+    font-size: 1rem;
 }
 
 .buscador input[type="submit"] {
-    padding: 1rem 2rem;
-    background-color: #ffffff;
+    padding: 1rem 1.5rem;
+    background-color: #00aaff;
     border: none;
-    color: rgb(0, 0, 0);
-    border-radius: 10px;
+    color: white;
+    border-radius: 0 10px 10px 0;
     cursor: pointer;
-    font-size: 1.1rem;
-}
-
-.opc_avanzadas {
-    color: #ccc;
     font-size: 1rem;
+}
+
+.buscador .opc_avanzadas {
+    color: #ccc;
+    font-size: 0.9rem;
     text-decoration: none;
-    text-align: center;
-    display: block;
-    margin-top: 0.5rem;
+    margin-left: 1rem;
 }
 
-.opc_avanzadas:hover {
-    color: #fff;
+.buscador .opc_avanzadas:hover {
+    color: #ffffff;
 }
 
-/* Navegación alineada a la derecha con más espacio */
+/* Enlaces de navegación alineados en fila */
 .links {
     display: flex;
+    justify-content: end center;
     list-style: none;
-    gap: 4rem;
+    gap: 2rem;
+    margin-top: 1rem;
+    flex-wrap: row;
 }
 
 .links li a {
     color: white;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1.2rem;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
+/* Estilos específicos para dispositivos */
+@media (min-width: 768px) {
+    .contenedor_header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .buscador {
+        width: 100%;
+        max-width: 800px;
+    }
+    .links {
+        display: flex;
+    }
+    .menu_hamburguesa {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .primer_vistazo {
+        padding: 1rem;
+    }
+    .contenedor_header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .buscador input[type="search"] {
+        width: 80%;
+    }
+    .links {
+        display: none; /* Oculta los enlaces en pantallas pequeñas */
+    }
+    .menu_hamburguesa {
+        display: block;
+    }
+    .menu_desplegable {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .menu_desplegable ul {
+        list-style: none;
+        padding: 10px;
+    }
+    .menu_desplegable ul li {
+        margin: 10px 0;
+    }
+    .menu_desplegable ul li a {
+        color: black;
+        text-decoration: none;
+    }
+    .btn_hamburguesa:focus + .menu_desplegable,
+    .menu_hamburguesa:hover .menu_desplegable {
+        display: block;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/*ESTILO RESPONSIVO DEL APARTADO DEL APARTADO DE DESCUBRE*/
+/* Estilo general de la sección */
+.contenido {
+    background-color: #f1f1f1;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.contenido h2 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+    position: relative;
+}
+
+.contenido h2::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #d3d3d3;
+    margin-top: 8px;
+}
+
+/* Navegación de enlaces en bloques */
+.DESCUBRE {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    list-style: none;
+    margin: 0;
+    gap: 1rem;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas nuevas en pantallas pequeñas */
+}
+
+.DESCUBRE li {
+    flex: 1;
+    min-width: 200px; /* Ancho mínimo para evitar que se encojan demasiado en pantallas pequeñas */
+}
+
+.DESCUBRE a {
+    display: block;
+    padding: 2rem;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+/* Colores de los bloques */
+.DESCUBRE li:nth-child(1) a {
+    background-color: #3367d6; /* Color para "AUTORES" */
+}
+
+.DESCUBRE li:nth-child(2) a {
+    background-color: #00d8cc; /* Color para "TEMAS" */
+}
+
+.DESCUBRE li:nth-child(3) a {
+    background-color: #00aaff; /* Color para "GESTIONES" */
+}
+
+.DESCUBRE a:hover {
+    opacity: 0.9;
+}
+/* Responsividad */
+@media (max-width: 1201px) {
+    .contenido h2 {
+        font-size: 1.8rem; /* Ajusta el tamaño de título en pantallas medianas */
+    }
+
+    .DESCUBRE {
+        gap: 0.5rem; /* Reduce el espacio entre elementos */
+    }
+
+    .DESCUBRE a {
+        padding: 1.5rem; /* Reduce el padding para mantener el tamaño adecuado */
+        font-size: 1.1rem; /* Ajusta el tamaño de texto */
+    }
+}
+@media (min-width: 769px) and (max-width: 1200px) {
+    .contenido h2 {
+        font-size: 1.8rem; /* Ajusta el tamaño de título en pantallas medianas */
+    }
+
+    .DESCUBRE {
+        gap: 0.5rem; /* Reduce el espacio entre elementos */
+    }
+
+    .DESCUBRE a {
+        padding: 1.5rem; /* Reduce el padding para mantener el tamaño adecuado */
+        font-size: 1.1rem; /* Ajusta el tamaño de texto */
+    }
+}
+/* Para pantallas medianas (tablets) */
+@media (min-width: 601px) and (max-width: 768px) {
+    .contenido h2 {
+        font-size: 1.8rem; /* Ajusta el tamaño de título en pantallas medianas */
+    }
+
+    .DESCUBRE {
+        gap: 0.5rem; /* Reduce el espacio entre elementos */
+    }
+
+    .DESCUBRE a {
+        padding: 1.5rem; /* Reduce el padding para mantener el tamaño adecuado */
+        font-size: 1.1rem; /* Ajusta el tamaño de texto */
+    }
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    .contenido h2 {
+        font-size: 1.5rem; /* Tamaño de título más pequeño */
+    }
+
+    .DESCUBRE {
+        flex-direction: column; /* Coloca los elementos en una columna */
+        align-items: center;
+    }
+
+    .DESCUBRE li {
+        width: 100%; /* Cada elemento ocupa el ancho completo en pantallas pequeñas */
+    }
+
+    .DESCUBRE a {
+        padding: 1rem; /* Reduce aún más el padding */
+        font-size: 1rem; /* Ajusta el tamaño de texto */
+    }
+}
+
+
+
+
+
+/*sesion de contenido responsivo de contenido de materias*/
+
+/* Estilo de fondo de la sección */
+section {
+    background-color: #007bff; /* Fondo azul */
+    padding: 50px; /* Espacio alrededor de la cuadrícula */
+    display: flex;
+    justify-content: center;
+}
+
+/* Contenedor en cuadrícula */
+.Contenido_de_temas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas en pantallas grandes */
+    gap: 30px; /* Espacio entre los elementos */
+    max-width: 1200px; /* Ancho máximo para la cuadrícula */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo de cada elemento en la cuadrícula */
+.Contenido_de_temas li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 110px; /* Tamaño ajustado de los cuadros */
+    background-color: rgb(255, 255, 255);
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5rem; /* Tamaño de texto ajustable */
+    border: 1px solid #000000; /* Borde negro */
+    border-radius: 25px; /* Borde redondeado */
+    min-height: 200px; /* Altura mínima de cada cuadro */
+    transition: background-color 0.3s, color 0.3s; /* Transiciones suaves en el hover */
+}
+
+/* Efecto de hover */
+.Contenido_de_temas li a:hover {
+    background-color: #ff5353;
+    color: #f0f0f0;
+}
+
+/* Responsividad */
+
+@media (max-width: 1201px) {
+    .Contenido_de_temas {
+        grid-template-columns: repeat(3, 1fr); /* Dos columnas en pantallas medianas */
+    }
+}
+@media (min-width: 769px) and (max-width: 1200px) {
+    .Contenido_de_temas {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+    }
+}
+/* Para pantallas medianas (tablets) */
+@media (min-width: 601px) and (max-width: 768px) {
+    .Contenido_de_temas {
+        grid-template-columns: repeat(1, 1fr); /* Dos columnas en pantallas medianas */
+    }
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (min-width: 0px) and (max-width: 600px) {
+    .Contenido_de_temas {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+
+    .Contenido_de_temas li a {
+        padding: 30px; /* Reduce el tamaño de los cuadros en dispositivos pequeños */
+        font-size: 1rem; /* Ajusta el tamaño de texto en dispositivos pequeños */
+        min-height: 100px; /* Reduce la altura mínima en dispositivos pequeños */
+    }
+}
+
+
+
+
+
+/* Estilos del Footer */
+footer {
+    background-color: #0057b7; /* Fondo azul */
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.footer_contenedor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    max-width: 12px;
+    margin: auto;
+}
+
+/* Estilos de la imagen del logo */
+.imagen_footer img {
+    max-width: 10px; /* Tamaño reducido del logo */
+    width: 1%;
+    height: 1px;
+    margin-right: 1rem;
+}
+
+/* Estilos de los enlaces */
+.links_footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 0;
+}
+
+.links_footer ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.links_footer ul li a:hover {
+    color: #00aaff; /* Color de hover */
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 768px) {
+    .footer_contenedor {
+        flex-direction: row; /* Muestra el logo y enlaces en fila */
+        justify-content: end;
+        align-items: end;
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 767px) {
+    .footer_contenedor {
+        flex-direction: row; /* Cambia a columna en móviles */
+    }
+    
+    .imagen_footer img {
+        max-width: 50px; /* Tamaño más pequeño del logo en móviles */
+    }
+    
+    .links_footer ul {
+        flex-direction: row; /* Alinear enlaces en columna en móviles */
+        gap: 1rem;
+    }
+}
