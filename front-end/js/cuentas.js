@@ -287,7 +287,8 @@ async function mostrarProyectos() {
             divProyecto.innerHTML = `
                 <p>Título: ${proyecto.titulo}</p>
                 <button onclick="eliminarProyecto('${proyecto._id}')">Eliminar</button>
-                <button onclick="mostrarFormularioEditarProyecto('${proyecto._id}', '${proyecto.titulo}', '${proyecto.resumen}', this)">Editar</button>`;
+                <button onclick="mostrarFormularioEditarProyecto('${proyecto._id}', this)">Editar</button>
+            `;
             listaProyectos.appendChild(divProyecto);
         });
     } catch (error) {
@@ -295,20 +296,44 @@ async function mostrarProyectos() {
     }
 }
 
-// Función para registrar un nuevo proyecto
+// Función para limpiar los comentarios de un JSON
+function limpiarComentariosJSON(jsonString) {
+    return jsonString.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '');
+}
+
+// Función para registrar un nuevo proyecto (actualizada)
 document.getElementById('registro-proyecto').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const titulo = document.getElementById('titulo').value;
-    const resumen = document.getElementById('resumen').value;
-    const pdf = document.getElementById('pdf').files[0];
+    const archivos = document.getElementById('archivos').files;
+    let archivoPDF = null;
+    let archivoJSON = null;
+
+    for (let archivo of archivos) {
+        if (archivo.type === 'application/pdf') {
+            archivoPDF = archivo;
+        } else if (archivo.type === 'application/json') {
+            archivoJSON = archivo;
+        }
+    }
+
+    if (!archivoPDF || !archivoJSON) {
+        alert('Debe subir un archivo PDF y un archivo JSON');
+        return;
+    }
 
     const formData = new FormData();
-    formData.append('titulo', titulo);
-    formData.append('resumen', resumen);
-    formData.append('file', pdf);
+    formData.append('file', archivoPDF);
 
     try {
+        const contenidoJSON = await archivoJSON.text();
+        const contenidoJSONSinComentarios = limpiarComentariosJSON(contenidoJSON); // Limpiar comentarios
+        const datosProyecto = JSON.parse(contenidoJSONSinComentarios);
+
+        for (let key in datosProyecto) {
+            formData.append(key, datosProyecto[key]);
+        }
+
         const response = await fetch('http://localhost:5000/proyectos', {
             method: 'POST',
             headers: {
@@ -322,7 +347,7 @@ document.getElementById('registro-proyecto').addEventListener('submit', async fu
         }
 
         alert('Proyecto registrado exitosamente');
-        mostrarProyectos();
+        //mostrarProyectos();
     } catch (error) {
         alert('Error: ' + error.message);
     }
@@ -350,8 +375,8 @@ async function eliminarProyecto(id) {
     }
 }
 
-// Función para mostrar el formulario de edición con los datos actuales del proyecto
-function mostrarFormularioEditarProyecto(id, titulo, resumen, botonEditar) {
+// Función para mostrar el formulario de edición de proyecto
+function mostrarFormularioEditarProyecto(id, botonEditar) {
     cerrarFormularioEditarProyecto(); // Cierra cualquier formulario de edición abierto
 
     const divProyecto = botonEditar.parentElement;
@@ -360,11 +385,8 @@ function mostrarFormularioEditarProyecto(id, titulo, resumen, botonEditar) {
     formularioEdicion.innerHTML = `
         <h3>Editar Proyecto</h3>
         <form id="editar-proyecto">
-            <label for="titulo-editado">Título:</label>
-            <input type="text" id="titulo-editado" name="titulo-editado" value="${titulo}" required>
-            <br>
-            <label for="resumen-editado">Resumen:</label>
-            <textarea id="resumen-editado" name="resumen-editado" required>${resumen}</textarea>
+            <label for="archivos-edit">Archivos:</label>
+            <input type="file" id="archivos-edit" name="archivos-edit" multiple required>
             <br>
             <button type="submit">Actualizar</button>
             <button type="button" onclick="cerrarFormularioEditarProyecto()">Cancelar</button>
@@ -376,17 +398,40 @@ function mostrarFormularioEditarProyecto(id, titulo, resumen, botonEditar) {
     document.getElementById('editar-proyecto').addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        const tituloEditado = document.getElementById('titulo-editado').value;
-        const resumenEditado = document.getElementById('resumen-editado').value;
+        const archivos = document.getElementById('archivos-edit').files;
+        let archivoPDF = null;
+        let archivoJSON = null;
+
+        for (let archivo of archivos) {
+            if (archivo.type === 'application/pdf') {
+                archivoPDF = archivo;
+            } else if (archivo.type === 'application/json') {
+                archivoJSON = archivo;
+            }
+        }
+
+        if (!archivoPDF || !archivoJSON) {
+            alert('Debe subir un archivo PDF y un archivo JSON');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', archivoPDF);
 
         try {
+            const contenidoJSON = await archivoJSON.text();
+            const datosProyecto = JSON.parse(contenidoJSON);
+
+            for (let key in datosProyecto) {
+                formData.append(key, datosProyecto[key]);
+            }
+
             const response = await fetch(`http://localhost:5000/proyectos/${id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
                     'x-auth-token': obtenerToken()
                 },
-                body: JSON.stringify({ titulo: tituloEditado, resumen: resumenEditado })
+                body: formData
             });
 
             if (!response.ok) {
@@ -395,7 +440,7 @@ function mostrarFormularioEditarProyecto(id, titulo, resumen, botonEditar) {
 
             alert('Proyecto actualizado exitosamente');
             cerrarFormularioEditarProyecto();
-            mostrarProyectos();
+            //mostrarProyectos();
         } catch (error) {
             alert('Error: ' + error.message);
         }
@@ -410,37 +455,9 @@ function cerrarFormularioEditarProyecto() {
     }
 }
 
-// Evento para cerrar sesión
-document.getElementById('cerrar-sesion').addEventListener('click', function () {
-    localStorage.removeItem('token');
-    location.reload();
-});
 
-// Modificar la función para mostrar contenido basado en rol
-function mostrarContenidoPorRol(rol) {
-    const loginForm = document.getElementById('login-form');
-    const contenido = document.getElementById('contenido');
-    const contenidoAdmin = document.getElementById('contenido-admin');
-    const contenidoCuentas = document.getElementById('contenido-cuentas');
-    const contenidoProyectos = document.getElementById('contenido-proyectos');
-
-    loginForm.style.display = 'none';
-    contenido.style.display = 'block';
-
-    if (rol === 'admin') {
-        if (contenidoAdmin && contenidoCuentas && contenidoProyectos) {
-            contenido.innerHTML = '';
-            contenidoAdmin.style.display = 'block';
-            contenidoCuentas.style.display = 'block';
-            contenidoProyectos.style.display = 'block';
-            mostrarCuentas();
-            mostrarProyectos();
-        } else {
-            console.error('Elementos contenido-admin, contenido-cuentas o contenido-proyectos no encontrados.');
-        }
-    } else if (rol === 'profesor') {
-        contenido.innerHTML = '<h2>Contenido para Profesor</h2>';
-    } else {
-        contenido.innerHTML = '<h2>Rol no reconocido</h2>';
-    }
-}
+    // Evento para cerrar sesión
+    document.getElementById('cerrar-sesion').addEventListener('click', function () {
+        localStorage.removeItem('token');
+        location.reload();
+    });

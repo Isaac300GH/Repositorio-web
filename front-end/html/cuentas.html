@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuentas</title>
 </head>
+
 <body>
     <form id="login-form">
         <h1>Iniciar Sesión</h1>
@@ -45,14 +47,8 @@
             <div id="lista-proyectos"></div>
             <h3>Registrar Nuevo Proyecto</h3>
             <form id="registro-proyecto">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required>
-                <br>
-                <label for="resumen">Resumen:</label>
-                <textarea id="resumen" name="resumen" required></textarea>
-                <br>
-                <label for="pdf">Archivo PDF:</label>
-                <input type="file" id="pdf" name="pdf" required>
+                <label for="archivos">Archivos:</label>
+                <input type="file" id="archivos" name="archivos" multiple required>
                 <br>
                 <button type="submit">Subir Proyecto</button>
             </form>
