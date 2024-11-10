@@ -7,11 +7,13 @@ dotenv.config(); // Carga las variables del archivo .env
 
 const authRoutes = require('./routes/auth');
 const proyectoRoutes = require('./routes/proyectos');
-const protegerRuta = require('./middleware/authMiddleware');
+const cors = require('cors');
 
 const app = express();
+// Configura CORS para permitir acceso desde el frontend
+app.use(cors({origin: 'http://127.0.0.1:5500' // Cambia esto al origen de tu frontend
+}));
 app.use(express.json());
-
 // Conexión a MongoDB
 connectDB();
 
