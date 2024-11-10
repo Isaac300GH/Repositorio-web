@@ -19,6 +19,46 @@
     <div id="contenido" style="display: none;">
         <!-- Contenido basado en el rol del usuario -->
     </div>
+    <div id="contenido-admin" style="display: none;">
+        <div id="contenido-cuentas" style="display: none;">
+            <h2>Control de Cuentas</h2>
+            <div id="lista-cuentas"></div>
+            <h3>Registrar Nueva Cuenta</h3>
+            <form id="registro-cuenta">
+                <label for="nombre-nuevo">Nombre:</label>
+                <input type="text" id="nombre-nuevo" name="nombre-nuevo" required>
+                <br>
+                <label for="password-nuevo">Contraseña:</label>
+                <input type="password" id="password-nuevo" name="password-nuevo" required>
+                <br>
+                <label for="rol-nuevo">Rol:</label>
+                <select id="rol-nuevo" name="rol-nuevo" required>
+                    <option value="admin">Admin</option>
+                    <option value="profesor">Profesor</option>
+                </select>
+                <br>
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+        <div id="contenido-proyectos" style="display: none;">
+            <h2>Control de Proyectos</h2>
+            <div id="lista-proyectos"></div>
+            <h3>Registrar Nuevo Proyecto</h3>
+            <form id="registro-proyecto">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+                <br>
+                <label for="resumen">Resumen:</label>
+                <textarea id="resumen" name="resumen" required></textarea>
+                <br>
+                <label for="pdf">Archivo PDF:</label>
+                <input type="file" id="pdf" name="pdf" required>
+                <br>
+                <button type="submit">Subir Proyecto</button>
+            </form>
+        </div>
+        <button id="cerrar-sesion">Cerrar Sesión</button>
+    </div>
     <script src="../js/cuentas.js"></script>
 </body>
 </html>

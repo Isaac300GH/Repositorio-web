@@ -70,12 +70,24 @@ document.getElementById('login-form').addEventListener('submit', async function 
 function mostrarContenidoPorRol(rol) {
     const loginForm = document.getElementById('login-form');
     const contenido = document.getElementById('contenido');
+    const contenidoAdmin = document.getElementById('contenido-admin');
+    const contenidoCuentas = document.getElementById('contenido-cuentas');
+    const contenidoProyectos = document.getElementById('contenido-proyectos');
 
     loginForm.style.display = 'none';
     contenido.style.display = 'block';
 
     if (rol === 'admin') {
-        contenido.innerHTML = '<h2>Contenido para Admin</h2>';
+        if (contenidoAdmin && contenidoCuentas && contenidoProyectos) {
+            contenido.innerHTML = '';
+            contenidoAdmin.style.display = 'block';
+            contenidoCuentas.style.display = 'block';
+            contenidoProyectos.style.display = 'block';
+            mostrarCuentas();
+            mostrarProyectos();
+        } else {
+            console.error('Elementos contenido-admin, contenido-cuentas o contenido-proyectos no encontrados.');
+        }
     } else if (rol === 'profesor') {
         contenido.innerHTML = '<h2>Contenido para Profesor</h2>';
     } else {
@@ -90,4 +102,345 @@ function mostrarOpcionesInicioSesion() {
 
     loginForm.style.display = 'block';
     contenido.style.display = 'none';
+}
+
+// Función para mostrar la lista de cuentas
+async function mostrarCuentas() {
+    try {
+        const response = await fetch('http://localhost:5000/auth', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': obtenerToken()
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al obtener cuentas: ' + response.statusText);
+        }
+
+        const cuentas = await response.json();
+        const listaCuentas = document.getElementById('lista-cuentas');
+        listaCuentas.innerHTML = '';
+
+        cuentas.forEach(cuenta => {
+            const divCuenta = document.createElement('div');
+            divCuenta.innerHTML = `
+                <p>Nombre: ${cuenta.nombre} - Rol: ${cuenta.rol}</p>
+                <button onclick="eliminarCuenta('${cuenta._id}')">Eliminar</button>
+                <button onclick="mostrarFormularioEditar('${cuenta._id}', '${cuenta.nombre}', '${cuenta.rol}', this)">Editar</button>
+            `;
+            listaCuentas.appendChild(divCuenta);
+        });
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+}
+
+// Función para registrar una nueva cuenta
+document.getElementById('registro-cuenta').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById('nombre-nuevo').value;
+    const password = document.getElementById('password-nuevo').value;
+    const rol = document.getElementById('rol-nuevo').value;
+
+    try {
+        const response = await fetch('http://localhost:5000/auth/registro', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': obtenerToken()
+            },
+            body: JSON.stringify({ nombre, password, rol })
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al registrar cuenta: ' + response.statusText);
+        }
+
+        alert('Cuenta registrada exitosamente');
+        mostrarCuentas();
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+});
+
+// Función para eliminar una cuenta
+async function eliminarCuenta(id) {
+    try {
+        const response = await fetch(`http://localhost:5000/auth/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': obtenerToken()
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al eliminar cuenta: ' + response.statusText);
+        }
+
+        alert('Cuenta eliminada exitosamente');
+        mostrarCuentas();
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+}
+
+// Función para mostrar el formulario de edición con los datos actuales
+function mostrarFormularioEditar(id, nombre, rol, botonEditar) {
+    cerrarFormularioEditar(); // Cierra cualquier formulario de edición abierto
+
+    const divCuenta = botonEditar.parentElement;
+    const formularioEdicion = document.createElement('div');
+    formularioEdicion.id = 'formulario-edicion';
+    formularioEdicion.innerHTML = `
+        <h3>Editar Cuenta</h3>
+        <form id="editar-cuenta">
+            <label for="nombre-editado">Nombre:</label>
+            <input type="text" id="nombre-editado" name="nombre-editado" value="${nombre}" required>
+            <br>
+            <label for="password-editado">Nueva Contraseña:</label>
+            <input type="password" id="password-editado" name="password-editado">
+            <br>
+            <label for="rol-editado">Rol:</label>
+            <select id="rol-editado" name="rol-editado" required>
+                <option value="admin" ${rol === 'admin' ? 'selected' : ''}>Admin</option>
+                <option value="profesor" ${rol === 'profesor' ? 'selected' : ''}>Profesor</option>
+            </select>
+            <br>
+            <button type="submit">Actualizar</button>
+            <button type="button" onclick="cerrarFormularioEditar()">Cancelar</button>
+        </form>
+    `;
+    divCuenta.appendChild(formularioEdicion);
+
+    // Evento para actualizar una cuenta
+    document.getElementById('editar-cuenta').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const nombreEditado = document.getElementById('nombre-editado').value;
+        const passwordEditado = document.getElementById('password-editado').value;
+        const rolEditado = document.getElementById('rol-editado').value;
+
+        const datosActualizados = {
+            nombre: nombreEditado,
+            rol: rolEditado
+        };
+        if (passwordEditado) {
+            datosActualizados.password = passwordEditado;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/auth/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': obtenerToken()
+                },
+                body: JSON.stringify(datosActualizados)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al actualizar cuenta: ' + response.statusText);
+            }
+
+            alert('Cuenta actualizada exitosamente');
+            cerrarFormularioEditar();
+            mostrarCuentas();
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+}
+
+// Función para cerrar el formulario de edición
+function cerrarFormularioEditar() {
+    const formularioEdicion = document.getElementById('formulario-edicion');
+    if (formularioEdicion) {
+        formularioEdicion.remove();
+    }
+}
+
+// Función para mostrar la lista de proyectos
+async function mostrarProyectos() {
+    try {
+        const response = await fetch('http://localhost:5000/proyectos', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': obtenerToken()
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al obtener proyectos: ' + response.statusText);
+        }
+
+        const proyectos = await response.json();
+        const listaProyectos = document.getElementById('lista-proyectos');
+        listaProyectos.innerHTML = '';
+
+        proyectos.forEach(proyecto => {
+            const divProyecto = document.createElement('div');
+            divProyecto.innerHTML = `
+                <p>Título: ${proyecto.titulo}</p>
+                <button onclick="eliminarProyecto('${proyecto._id}')">Eliminar</button>
+                <button onclick="mostrarFormularioEditarProyecto('${proyecto._id}', '${proyecto.titulo}', '${proyecto.resumen}', this)">Editar</button>`;
+            listaProyectos.appendChild(divProyecto);
+        });
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+}
+
+// Función para registrar un nuevo proyecto
+document.getElementById('registro-proyecto').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const titulo = document.getElementById('titulo').value;
+    const resumen = document.getElementById('resumen').value;
+    const pdf = document.getElementById('pdf').files[0];
+
+    const formData = new FormData();
+    formData.append('titulo', titulo);
+    formData.append('resumen', resumen);
+    formData.append('file', pdf);
+
+    try {
+        const response = await fetch('http://localhost:5000/proyectos', {
+            method: 'POST',
+            headers: {
+                'x-auth-token': obtenerToken()
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al registrar proyecto: ' + response.statusText);
+        }
+
+        alert('Proyecto registrado exitosamente');
+        mostrarProyectos();
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+});
+
+// Función para eliminar un proyecto
+async function eliminarProyecto(id) {
+    try {
+        const response = await fetch(`http://localhost:5000/proyectos/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': obtenerToken()
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al eliminar proyecto: ' + response.statusText);
+        }
+
+        alert('Proyecto eliminado exitosamente');
+        mostrarProyectos();
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+}
+
+// Función para mostrar el formulario de edición con los datos actuales del proyecto
+function mostrarFormularioEditarProyecto(id, titulo, resumen, botonEditar) {
+    cerrarFormularioEditarProyecto(); // Cierra cualquier formulario de edición abierto
+
+    const divProyecto = botonEditar.parentElement;
+    const formularioEdicion = document.createElement('div');
+    formularioEdicion.id = 'formulario-edicion-proyecto';
+    formularioEdicion.innerHTML = `
+        <h3>Editar Proyecto</h3>
+        <form id="editar-proyecto">
+            <label for="titulo-editado">Título:</label>
+            <input type="text" id="titulo-editado" name="titulo-editado" value="${titulo}" required>
+            <br>
+            <label for="resumen-editado">Resumen:</label>
+            <textarea id="resumen-editado" name="resumen-editado" required>${resumen}</textarea>
+            <br>
+            <button type="submit">Actualizar</button>
+            <button type="button" onclick="cerrarFormularioEditarProyecto()">Cancelar</button>
+        </form>
+    `;
+    divProyecto.appendChild(formularioEdicion);
+
+    // Evento para actualizar un proyecto
+    document.getElementById('editar-proyecto').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const tituloEditado = document.getElementById('titulo-editado').value;
+        const resumenEditado = document.getElementById('resumen-editado').value;
+
+        try {
+            const response = await fetch(`http://localhost:5000/proyectos/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': obtenerToken()
+                },
+                body: JSON.stringify({ titulo: tituloEditado, resumen: resumenEditado })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al actualizar proyecto: ' + response.statusText);
+            }
+
+            alert('Proyecto actualizado exitosamente');
+            cerrarFormularioEditarProyecto();
+            mostrarProyectos();
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+}
+
+// Función para cerrar el formulario de edición de proyecto
+function cerrarFormularioEditarProyecto() {
+    const formularioEdicion = document.getElementById('formulario-edicion-proyecto');
+    if (formularioEdicion) {
+        formularioEdicion.remove();
+    }
+}
+
+// Evento para cerrar sesión
+document.getElementById('cerrar-sesion').addEventListener('click', function () {
+    localStorage.removeItem('token');
+    location.reload();
+});
+
+// Modificar la función para mostrar contenido basado en rol
+function mostrarContenidoPorRol(rol) {
+    const loginForm = document.getElementById('login-form');
+    const contenido = document.getElementById('contenido');
+    const contenidoAdmin = document.getElementById('contenido-admin');
+    const contenidoCuentas = document.getElementById('contenido-cuentas');
+    const contenidoProyectos = document.getElementById('contenido-proyectos');
+
+    loginForm.style.display = 'none';
+    contenido.style.display = 'block';
+
+    if (rol === 'admin') {
+        if (contenidoAdmin && contenidoCuentas && contenidoProyectos) {
+            contenido.innerHTML = '';
+            contenidoAdmin.style.display = 'block';
+            contenidoCuentas.style.display = 'block';
+            contenidoProyectos.style.display = 'block';
+            mostrarCuentas();
+            mostrarProyectos();
+        } else {
+            console.error('Elementos contenido-admin, contenido-cuentas o contenido-proyectos no encontrados.');
+        }
+    } else if (rol === 'profesor') {
+        contenido.innerHTML = '<h2>Contenido para Profesor</h2>';
+    } else {
+        contenido.innerHTML = '<h2>Rol no reconocido</h2>';
+    }
 }
