@@ -298,7 +298,7 @@
 /* Estilo de fondo de la sección */
 section {
     background-color: #007bff; /* Fondo azul */
-    padding: 50px; /* Espacio alrededor de la cuadrícula */
+    padding: 30px; /* Espacio alrededor de la cuadrícula */
     display: flex;
     justify-content: center;
 }
@@ -319,7 +319,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 110px; /* Tamaño ajustado de los cuadros */
+    padding: 80px; /* Tamaño ajustado de los cuadros */
     background-color: rgb(255, 255, 255);
     color: black;
     text-align: center;
@@ -345,9 +345,14 @@ section {
         grid-template-columns: repeat(3, 1fr); /* Dos columnas en pantallas medianas */
     }
 }
-@media (min-width: 769px) and (max-width: 1200px) {
+@media (min-width: 981px) and (max-width: 1200px) {
     .Contenido_de_temas {
         grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+    }
+}
+@media (min-width: 769px) and (max-width: 980px) {
+    .Contenido_de_temas {
+        grid-template-columns: repeat(1, 1fr); /* Dos columnas en pantallas medianas */
     }
 }
 /* Para pantallas medianas (tablets) */
