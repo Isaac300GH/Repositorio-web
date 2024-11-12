@@ -53,8 +53,21 @@
                 <button type="submit">Subir Proyecto</button>
             </form>
         </div>
-        <button id="cerrar-sesion">Cerrar Sesión</button>
     </div>
+    <div id="contenido-profesor" style="display: none;">
+        <h2>Actualizar Información de Cuentas</h2>
+        <form id="editar-cuenta-propia">
+            <label for="nombre-editado">Nombre:</label>
+            <input type="text" id="name-editado" name="nombre-editado" required>
+            <br>
+            <label for="password-editado">Nueva Contraseña:</label>
+            <input type="password" id="pswd-editado" name="password-editado">
+            <br>
+            <button type="submit">Actualizar</button>
+        </form>
+        <button id="eliminar-cuenta-propia">Eliminar cuenta</button>
+    </div>
+    <button id="cerrar-sesion" style="display: none;">Cerrar Sesión</button>
     <script src="../js/cuentas.js"></script>
 </body>
 </html>

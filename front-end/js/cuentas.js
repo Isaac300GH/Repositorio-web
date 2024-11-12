@@ -7,7 +7,12 @@ function guardarToken(token) {
 function obtenerToken() {
     return localStorage.getItem('token');
 }
-
+function guardarId(id_cuenta) {
+    localStorage.setItem('id_cuenta', id_cuenta);
+}
+function obtenerId() {
+    return localStorage.getItem('id_cuenta');
+}
 // Función para verificar si el token ha expirado
 function isTokenExpired(token) {
     const payload = JSON.parse(atob(token.split('.')[1]));
@@ -28,6 +33,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (token) {
             // Eliminar el token expirado
             localStorage.removeItem('token');
+            localStorage.removeItem("id_cuenta")
         }
     }
 });
@@ -56,6 +62,33 @@ document.getElementById('login-form').addEventListener('submit', async function 
         const payload = JSON.parse(atob(token.split('.')[1]));
         const rol = payload.rol;
 
+        //guardar id de usuario en localstage
+        fetch('http://localhost:5000/auth', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token
+            }
+        })
+            .then(r => {
+                if (!r.ok) {
+                    throw new Error('Error en la solicitud: ' + r.statusText);
+                }
+                return r.json(); // Parsear la respuesta JSON
+            })
+            .then(d => {
+                const c = d.find(i => i.nombre == nombre);
+                if (c && token) {
+                    console.log(c._id);
+                    guardarId(c._id);
+                } else {
+                    console.log("Usuario no encontrado")
+                }
+            })
+            .catch(error => {
+                console.error("Error al obtener los datos:", error);
+            });
+
         // Guardar el token en Local Storage
         guardarToken(token);
 
@@ -73,10 +106,12 @@ function mostrarContenidoPorRol(rol) {
     const contenidoAdmin = document.getElementById('contenido-admin');
     const contenidoCuentas = document.getElementById('contenido-cuentas');
     const contenidoProyectos = document.getElementById('contenido-proyectos');
-
+    const contenidoProfesor = document.getElementById('contenido-profesor');
+    const eliminarCuentaPropia = document.getElementById('eliminar-cuenta-propia');
+    const cerrarsesion = document.getElementById('cerrar-sesion');
     loginForm.style.display = 'none';
     contenido.style.display = 'block';
-
+    cerrarsesion.style.display = 'block';
     if (rol === 'admin') {
         if (contenidoAdmin && contenidoCuentas && contenidoProyectos) {
             contenido.innerHTML = '';
@@ -89,7 +124,63 @@ function mostrarContenidoPorRol(rol) {
             console.error('Elementos contenido-admin, contenido-cuentas o contenido-proyectos no encontrados.');
         }
     } else if (rol === 'profesor') {
-        contenido.innerHTML = '<h2>Contenido para Profesor</h2>';
+        if (contenidoProfesor) {
+            contenido.innerHTML = ''
+            contenidoProfesor.style.display = 'block';
+            eliminarCuentaPropia.addEventListener('click', async () => {
+                const response = await fetch(`http://localhost:5000/auth/${obtenerId()}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-auth-token': obtenerToken()
+                    }
+                });
+        
+                if (!response.ok) {
+                    throw new Error('Error al eliminar cuenta: ' + response.statusText);
+                }
+        
+                alert('Cuenta eliminada exitosamente');
+                localStorage.removeItem("id_cuenta");
+                localStorage.removeItem('token');
+                location.reload();
+            });
+            document.getElementById('editar-cuenta-propia').addEventListener('submit', async function (e) {
+                e.preventDefault();
+        
+                const nombreEditado = document.getElementById('name-editado').value;
+                const passwordEditado = document.getElementById('pswd-editado').value;
+        
+                const datosActualizados = {
+                    nombre: nombreEditado,
+                };
+                if (passwordEditado) {
+                    datosActualizados.password = passwordEditado;
+                }
+        
+                try {
+                    const response = await fetch(`http://localhost:5000/auth/${obtenerId()}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-auth-token': obtenerToken()
+                        },
+                        body: JSON.stringify(datosActualizados)
+                    });
+        
+                    if (!response.ok) {
+                        throw new Error('Error al actualizar cuenta: ' + response.statusText);
+                    }
+        
+                    alert('Cuenta actualizada exitosamente');
+                    location.reload();
+                } catch (error) {
+                    alert('Error: ' + error.message);
+                }
+            });
+        } else {
+            console.error('Elementos contenido-profesor no encontrados.');
+        }
     } else {
         contenido.innerHTML = '<h2>Rol no reconocido</h2>';
     }
@@ -99,7 +190,8 @@ function mostrarContenidoPorRol(rol) {
 function mostrarOpcionesInicioSesion() {
     const loginForm = document.getElementById('login-form');
     const contenido = document.getElementById('contenido');
-
+    const cerrarsesion = document.getElementById('cerrar-sesion')
+    cerrarsesion.style.display = 'none';
     loginForm.style.display = 'block';
     contenido.style.display = 'none';
 }
@@ -285,7 +377,7 @@ async function mostrarProyectos() {
         proyectos.forEach(proyecto => {
             const divProyecto = document.createElement('div');
             divProyecto.innerHTML = `
-                <p>Título: ${proyecto.titulo}</p>
+                <p>Proyecto: ${proyecto.titulo}</p>
                 <button onclick="eliminarProyecto('${proyecto._id}')">Eliminar</button>
                 <button onclick="mostrarFormularioEditarProyecto('${proyecto._id}', this)">Editar</button>
             `;
@@ -456,8 +548,9 @@ function cerrarFormularioEditarProyecto() {
 }
 
 
-    // Evento para cerrar sesión
-    document.getElementById('cerrar-sesion').addEventListener('click', function () {
-        localStorage.removeItem('token');
-        location.reload();
-    });
+// Evento para cerrar sesión
+document.getElementById('cerrar-sesion').addEventListener('click', function () {
+    localStorage.removeItem('token');
+    localStorage.removeItem("id_cuenta")
+    location.reload();
+});
