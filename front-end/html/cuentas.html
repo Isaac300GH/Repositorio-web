@@ -1,39 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="../imagenes/logos/icono pag.png">
-        <title>Repositorio JMG</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/normalize.css">
-        <link rel="stylesheet" href="../css/cuentas.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuentas</title>
+</head>
+
 <body>
-    <div class="login">
-        <svg width="24" height="24" viewBox="0 0 24 24" class="login__avatar">
-          <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path>
-        </svg>
-        <form action="#" class="login__form">
-          <div class="login__block">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" class="login__input" placeholder="Enter your username">
-          </div>
-          <div class="login__block">
-            <label for="username">Password:</label>
-            <input type="password" name="password" id="password" class="login__input" placeholder="Enter your password">
-          </div>
-          <div class="login__block">
-            <a href="#">Forgot your password?</a>
+    <form id="login-form">
+        <h1>Iniciar Sesión</h1>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <div id="contenido" style="display: none;">
+        <!-- Contenido basado en el rol del usuario -->
+    </div>
+    <div id="contenido-admin" style="display: none;">
+        <div id="contenido-cuentas" style="display: none;">
+            <h2>Control de Cuentas</h2>
+            <div id="lista-cuentas"></div>
+            <h3>Registrar Nueva Cuenta</h3>
+            <form id="registro-cuenta">
+                <label for="nombre-nuevo">Nombre:</label>
+                <input type="text" id="nombre-nuevo" name="nombre-nuevo" required>
+                <br>
+                <label for="password-nuevo">Contraseña:</label>
+                <input type="password" id="password-nuevo" name="password-nuevo" required>
+                <br>
+                <label for="rol-nuevo">Rol:</label>
+                <select id="rol-nuevo" name="rol-nuevo" required>
+                    <option value="admin">Admin</option>
+                    <option value="profesor">Profesor</option>
+                </select>
+                <br>
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+        <div id="contenido-proyectos" style="display: none;">
+            <h2>Control de Proyectos</h2>
+            <div id="lista-proyectos"></div>
+            <h3>Registrar Nuevo Proyecto</h3>
+            <form id="registro-proyecto">
+                <label for="archivos">Archivos:</label>
+                <input type="file" id="archivos" name="archivos" multiple required>
+                <br>
+                <button type="submit">Subir Proyecto</button>
+            </form>
+        </div>
+    </div>
+    <div id="contenido-profesor" style="display: none;">
+        <h2>Actualizar Información de Cuentas</h2>
+        <form id="editar-cuenta-propia">
+            <label for="nombre-editado">Nombre:</label>
+            <input type="text" id="name-editado" name="nombre-editado" required>
             <br>
-            <a href="#">Register here!</a>
-          </div>
-          <div class="login__block">
-            <input type="submit" value="LogIn" class="login__btn">
-          </div>
+            <label for="password-editado">Nueva Contraseña:</label>
+            <input type="password" id="pswd-editado" name="password-editado">
+            <br>
+            <button type="submit">Actualizar</button>
         </form>
-      </div>
+        <button id="eliminar-cuenta-propia">Eliminar cuenta</button>
+    </div>
+    <button id="cerrar-sesion" style="display: none;">Cerrar Sesión</button>
+    <script src="../js/cuentas.js"></script>
 </body>
 </html>

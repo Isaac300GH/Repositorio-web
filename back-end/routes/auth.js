@@ -16,7 +16,7 @@ router.post('/login', loginUsuario);
 // Ruta para actualizar a un usuario por id
 router.put('/:id', protegerRuta, verificarRol(["admin", "profesor"]), actualizarUsuario);
 // Ruta para obtener a todos los usuarios
-router.get('/', protegerRuta, verificarRol(["admin"]), obtenerUsuarios);
+router.get('/', protegerRuta, verificarRol(["admin", "profesor"]), obtenerUsuarios);
 // Ruta para eliminar a un usuario por id
 router.delete('/:id', protegerRuta, verificarRol(["admin", "profesor"]), eliminarUsuario);
 
