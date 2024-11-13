@@ -5,7 +5,7 @@ main {
 
 .left-section {
     flex: 1; /* Ocupa menos espacio */
-    padding: 20px;
+    padding: 40px;
     background-color: #f0f0f0; /* Cambia el color de fondo si lo deseas */
 }
 
@@ -15,8 +15,40 @@ main {
     background-color: #ffffff; /* Cambia el color de fondo si lo deseas */
 }
 
-/* Para dispositivos pequeños */
-@media (max-width: 768px) {
+
+
+
+@media (max-width: 1201px) {
+
+    
+    .left-section, .right-section {
+        flex: 1; /* Ambas secciones ocupan el mismo espacio en dispositivos pequeños */
+    }
+}
+@media (min-width: 981px) and (max-width: 1200px) {
+
+    
+    .left-section, .right-section {
+        flex: 1; /* Ambas secciones ocupan el mismo espacio en dispositivos pequeños */
+    }
+}
+@media (min-width: 769px) and (max-width: 980px) {
+
+    .left-section, .right-section {
+        flex: 1; /* Ambas secciones ocupan el mismo espacio en dispositivos pequeños */
+    }
+}
+/* Para pantallas medianas (tablets) */
+@media (min-width: 601px) and (max-width: 768px) {
+  
+    
+    .left-section, .right-section {
+        flex: 1; /* Ambas secciones ocupan el mismo espacio en dispositivos pequeños */
+    }
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (min-width: 0px) and (max-width: 600px) {
     main {
         flex-direction: column; /* Apila las secciones verticalmente */
     }
@@ -25,3 +57,4 @@ main {
         flex: 1; /* Ambas secciones ocupan el mismo espacio en dispositivos pequeños */
     }
 }
+
