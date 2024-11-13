@@ -189,7 +189,10 @@
     gap: 1rem;
     flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas nuevas en pantallas pequeñas */
 }
-
+h3  {
+    text-decoration: none;
+ 
+}
 .DESCUBRE li {
     flex: 1;
     min-width: 200px; /* Ancho mínimo para evitar que se encojan demasiado en pantallas pequeñas */
