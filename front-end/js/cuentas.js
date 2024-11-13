@@ -116,7 +116,7 @@ function mostrarContenidoPorRol(rol) {
     if (rol === 'admin') {
         if (contenidoAdmin && contenidoCuentas && contenidoProyectos) {
             contenido.innerHTML = '';
-            contenidoAdmin.style.display = 'block';
+            contenidoAdmin.style.display = 'flex';
             contenidoCuentas.style.display = 'block';
             contenidoProyectos.style.display = 'block';
             mostrarCuentas();

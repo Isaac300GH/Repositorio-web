@@ -1,103 +1,148 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="../imagenes/logos/icono pag.png">
-        <title>Repositorio JMG</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/normalize.css">
-        <link rel="stylesheet" href="../css/styles.css">
-        <link rel="stylesheet" href="../css/como_publicar.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../imagenes/logos/icono pag.png">
+    <title>Repositorio JMG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/como_publicar.css">
+</head>
+
 <body>
-        <!-- Header -->
-        <header>
-            <div class="primer_vistazo">
-                <a href="../index.html"><img src="../imagenes/logos/repositorio web.png" alt="Escudo JMG"></a>
-                <div class="titulo_header">
-                    <div class="buscador">
-                        <input type="search" placeholder="Búsqueda...">
-                        <input type="submit" value="Buscar">
-                        <a href="html/opciones avanzafas.html" style="color: white; text-decoration: none;">Opciones avanzadas</a>
-                    </div>
-                    <div class="links">
-                        <div class="links_footer">
-                            <ul>
-                                <li><a href="acerca.html">ACERCA DE</a></li>
-                                <li><a href="cuentas.html">CUENTAS</a></li>
-                            </ul>
-                        </div>
-                    </div>
+    <!-- Header -->
+    <header>
+        <div class="primer_vistazo">
+            <a href="../index.html"><img src="../imagenes/logos/repositorio web.png" alt="Escudo JMG"></a>
+            <div class="titulo_header">
+                <div class="buscador">
+                    <input type="search" id="campoBusqueda" name="search" placeholder="Búsqueda...">
+                    <input type="submit" value="Buscar"><br>
                 </div>
-                <div class="menu_hamburguesa">
-                    <button class="btn_hamburguesa">☰</button>
-                    <nav class="menu_desplegable">
+                <div class="links">
+                    <div class="links_footer">
                         <ul>
                             <li><a href="acerca.html">ACERCA DE</a></li>
-                    
                             <li><a href="cuentas.html">CUENTAS</a></li>
                         </ul>
-                    </nav>
+                    </div>
                 </div>
             </div>
-        </header>
-    
-        <!-- Main content -->
-        <main>
-            <section class="left-section">
-                <p>
-                    <span><b>DOS PUNTOS ESPECÍFICOS QUE JUSTIFICAN LA CREACIÓN DEL REPOSITORIO DE LA UNIDAD EDUCATIVA TÉCNICO HUMANÍSTICO JOSEFA MANUELA GANDARILLAS SON LOS SIGUIENTES:</b></span> <br> <br>
-                    <b>1. FACILITAR EL ACCESO Y CONSULTA DE PROYECTOS PREVIOS.</b><br>
-                    El repositorio tiene la intención de reunir en un solo lugar los proyectos de titulación de gestiones anteriores, permitiendo que los estudiantes actuales puedan consultarlos de manera organizada y eficiente. Esto facilita el proceso de documentación y el desarrollo de nuevos proyectos, ya que ofrece ejemplos y antecedentes sólidos que pueden servir como referencia <br> <br>
-                    <b>2. MEJORAR LA GESTIÓN Y ORGANIZACIÓN DE INFORMACIÓN. </b><br>
-                    Dado que anteriormente la información de los proyectos estaba dispersa y era de difícil acceso, el repositorio se plantea como una solución para almacenar, catalogar y gestionar estos documentos. Esto contribuye a una organización más eficaz y optimiza el uso del tiempo en la búsqueda de información relevante, ayudando tanto a estudiantes como a profesores en el seguimiento y evaluación de los trabajos realizados <br> <br>​
-                </p>
-            </section>
-            <section class="right-section">
-                <p>
-                    <b> COMO PUBLICAR</b> <br> <br> <br> <br>
-                  <b> 1.Estructurar los datos en formato JSON: </b> <br> <br> Se debe crear una guía que incluya el formato específico de los datos del proyecto en un archivo JSON. Esto estandariza la información y facilita su procesamiento por el sistema del repositorio​ <br> <br>
-                  <b>2.Configurar permisos de acceso y roles de usuario:</b> <br> <br> El administrador y los profesores de BTH tendrán control sobre la gestión de proyectos, mientras que los visitantes podrán consultar el repositorio sin necesidad de registrarse. Esto se logra implementando un sistema de autenticación que usa tokens para gestionar los permisos de usuario <br><br>
-                  <b>3.Subir los datos de los proyectos al servidor:</b> <br> <br> Realizar la primera carga de datos de los proyectos de grado en la plataforma, incluyendo la conexión con la base de datos para la gestión y almacenamiento de la información <br><br>
-                  <b>3.Realizar pruebas y ajustes finales:</b> <br>  <br>Antes de la publicación, es fundamental realizar pruebas de funcionamiento para asegurar que la interfaz y la navegación sean intuitivas y accesibles. También se deben corregir posibles errores para garantizar una experiencia de usuario satisfactoria​ <br> <br> <br>
-                    <b>PASOS ESPECIFICOS PARA PUBLICAR TU INFORME</b> <br> <br>
-                    Para publicar un proyecto en el repositorio, primero debes acceder a la página de publicación, que estará disponible en el menú principal o en el panel de usuario después de iniciar sesión con una cuenta de profesor o administrador. Una vez en la página, verás un formulario diseñado para recolectar la información clave del proyecto. <br> <br>
-
-El formulario te pedirá que ingreses varios datos importantes. Primero, escribe el título del proyecto de forma clara y concisa. Luego, proporciona un breve resumen que describa el contenido, los objetivos o los resultados del proyecto. A continuación, en el campo de autores, debes ingresar los nombres completos de los estudiantes que realizaron el proyecto para asegurar que sean correctamente reconocidos. <br> <br> También deberás indicar el año de finalización del proyecto, lo que ayudará a organizar y clasificar el proyecto cronológicamente en el repositorio. El campo de tutores te permitirá incluir los nombres de los profesores que guiaron el proyecto, y en el campo de categorías podrás especificar los temas o áreas relevantes del proyecto, facilitando su búsqueda en el repositorio. <br> <br>
-
-Una vez ingresados estos datos, debes subir el archivo en formato PDF. Para ello, haz clic en el botón de "Seleccionar archivo" o "Examinar", y elige el archivo PDF del proyecto desde tu dispositivo. Asegúrate de que el archivo esté en el formato adecuado y que contenga toda la información relevante, ya que solo se admiten archivos PDF para mantener la coherencia del repositorio. <br> <br>
-
-Es recomendable que revises toda la información ingresada antes de enviar el proyecto. Verifica que todos los campos estén completos y que la información sea precisa, especialmente los nombres, el año y el archivo PDF. Esto te ayudará a evitar errores o detalles faltantes que podrían afectar la calidad del registro. <br> <br>
-
-Cuando estés seguro de que toda la información es correcta, haz clic en el botón de "Publicar" o "Enviar". El sistema guardará el proyecto en el repositorio, y posiblemente verás un mensaje de confirmación en pantalla para asegurarte de que la subida se ha realizado correctamente. Tras la publicación, el proyecto estará disponible para consulta en el repositorio. <br> <br>
-
-Es importante recordar que la calificación es un campo opcional al momento de la publicación. Los profesores podrán añadir o modificar esta calificación más adelante si el proyecto aún no ha sido evaluado o si es necesario realizar algún ajuste. También puedes consultar la sección de "Proyectos Publicados" para verificar que el proyecto ha sido añadido correctamente al sistema. <br> <br>
-
-Esta guía sobre cómo publicar un proyecto te ayudará a realizar el proceso de manera eficiente, garantizando que toda la información esté en el formato adecuado y que los detalles importantes del proyecto estén completos para su consulta futura. <br> <br>
-                </p>
-            </section>
-        </main>
-        
-        <!-- Footer -->
-        <footer>
-            <div class="footer">
-                <!-- <div class="imagen_foooter">
-                    <img src="imagenes/logos/logo jmg n-t.png" alt="ESCUDO DEL COELGIO FINAL">
-                </div> -->
-                <div class="links_footer">
+            <div class="menu_hamburguesa">
+                <button class="btn_hamburguesa">☰</button>
+                <nav class="menu_desplegable">
                     <ul>
                         <li><a href="acerca.html">ACERCA DE</a></li>
-                        <li><a href="como_publicar.html">COMO PUBLICAR</a></li>
+
                         <li><a href="cuentas.html">CUENTAS</a></li>
                     </ul>
-                </div>
-    
+                </nav>
             </div>
-        </footer>
-        <script src="../js/styles.js"></script>
-    </body>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <section class="left-section">
+            <p>
+                <span><b>DOS PUNTOS ESPECÍFICOS QUE JUSTIFICAN LA CREACIÓN DEL REPOSITORIO DE LA UNIDAD EDUCATIVA
+                        TÉCNICO HUMANÍSTICO JOSEFA MANUELA GANDARILLAS SON LOS SIGUIENTES:</b></span> <br> <br>
+                <b>1. FACILITAR EL ACCESO Y CONSULTA DE PROYECTOS PREVIOS.</b><br>
+                El repositorio tiene la intención de reunir en un solo lugar los proyectos de titulación de gestiones
+                anteriores, permitiendo que los estudiantes actuales puedan consultarlos de manera organizada y
+                eficiente. Esto facilita el proceso de documentación y el desarrollo de nuevos proyectos, ya que ofrece
+                ejemplos y antecedentes sólidos que pueden servir como referencia <br> <br>
+                <b>2. MEJORAR LA GESTIÓN Y ORGANIZACIÓN DE INFORMACIÓN. </b><br>
+                Dado que anteriormente la información de los proyectos estaba dispersa y era de difícil acceso, el
+                repositorio se plantea como una solución para almacenar, catalogar y gestionar estos documentos. Esto
+                contribuye a una organización más eficaz y optimiza el uso del tiempo en la búsqueda de información
+                relevante, ayudando tanto a estudiantes como a profesores en el seguimiento y evaluación de los trabajos
+                realizados <br> <br>​
+            </p>
+        </section>
+        <section class="right-section">
+            <p>
+                <b> COMO PUBLICAR</b> <br> <br> <br> <br>
+                <b> 1.Estructurar los datos en formato JSON: </b> <br> <br> Se debe crear una guía que incluya el
+                formato específico de los datos del proyecto en un archivo JSON. Esto estandariza la información y
+                facilita su procesamiento por el sistema del repositorio​ <br> <br>
+                <b>2.Configurar permisos de acceso y roles de usuario:</b> <br> <br> El administrador y los profesores
+                de BTH tendrán control sobre la gestión de proyectos, mientras que los visitantes podrán consultar el
+                repositorio sin necesidad de registrarse. Esto se logra implementando un sistema de autenticación que
+                usa tokens para gestionar los permisos de usuario <br><br>
+                <b>3.Subir los datos de los proyectos al servidor:</b> <br> <br> Realizar la primera carga de datos de
+                los proyectos de grado en la plataforma, incluyendo la conexión con la base de datos para la gestión y
+                almacenamiento de la información <br><br>
+                <b>3.Realizar pruebas y ajustes finales:</b> <br> <br>Antes de la publicación, es fundamental realizar
+                pruebas de funcionamiento para asegurar que la interfaz y la navegación sean intuitivas y accesibles.
+                También se deben corregir posibles errores para garantizar una experiencia de usuario satisfactoria​
+                <br> <br> <br>
+                <b>PASOS ESPECIFICOS PARA PUBLICAR TU INFORME</b> <br> <br>
+                Para publicar un proyecto en el repositorio, primero debes acceder a la página de publicación, que
+                estará disponible en el menú principal o en el panel de usuario después de iniciar sesión con una cuenta
+                de profesor o administrador. Una vez en la página, verás un formulario diseñado para recolectar la
+                información clave del proyecto. <br> <br>
+
+                El formulario te pedirá que ingreses varios datos importantes. Primero, escribe el título del proyecto
+                de forma clara y concisa. Luego, proporciona un breve resumen que describa el contenido, los objetivos o
+                los resultados del proyecto. A continuación, en el campo de autores, debes ingresar los nombres
+                completos de los estudiantes que realizaron el proyecto para asegurar que sean correctamente
+                reconocidos. <br> <br> También deberás indicar el año de finalización del proyecto, lo que ayudará a
+                organizar y clasificar el proyecto cronológicamente en el repositorio. El campo de tutores te permitirá
+                incluir los nombres de los profesores que guiaron el proyecto, y en el campo de categorías podrás
+                especificar los temas o áreas relevantes del proyecto, facilitando su búsqueda en el repositorio. <br>
+                <br>
+
+                Una vez ingresados estos datos, debes subir el archivo en formato PDF. Para ello, haz clic en el botón
+                de "Seleccionar archivo" o "Examinar", y elige el archivo PDF del proyecto desde tu dispositivo.
+                Asegúrate de que el archivo esté en el formato adecuado y que contenga toda la información relevante, ya
+                que solo se admiten archivos PDF para mantener la coherencia del repositorio. <br> <br>
+
+                Es recomendable que revises toda la información ingresada antes de enviar el proyecto. Verifica que
+                todos los campos estén completos y que la información sea precisa, especialmente los nombres, el año y
+                el archivo PDF. Esto te ayudará a evitar errores o detalles faltantes que podrían afectar la calidad del
+                registro. <br> <br>
+
+                Cuando estés seguro de que toda la información es correcta, haz clic en el botón de "Publicar" o
+                "Enviar". El sistema guardará el proyecto en el repositorio, y posiblemente verás un mensaje de
+                confirmación en pantalla para asegurarte de que la subida se ha realizado correctamente. Tras la
+                publicación, el proyecto estará disponible para consulta en el repositorio. <br> <br>
+
+                Es importante recordar que la calificación es un campo opcional al momento de la publicación. Los
+                profesores podrán añadir o modificar esta calificación más adelante si el proyecto aún no ha sido
+                evaluado o si es necesario realizar algún ajuste. También puedes consultar la sección de "Proyectos
+                Publicados" para verificar que el proyecto ha sido añadido correctamente al sistema. <br> <br>
+
+                Esta guía sobre cómo publicar un proyecto te ayudará a realizar el proceso de manera eficiente,
+                garantizando que toda la información esté en el formato adecuado y que los detalles importantes del
+                proyecto estén completos para su consulta futura. <br> <br>
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer">
+            <!-- <div class="imagen_foooter">
+                    <img src="imagenes/logos/logo jmg n-t.png" alt="ESCUDO DEL COELGIO FINAL">
+                </div> -->
+            <div class="links_footer">
+                <ul>
+                    <li><a href="acerca.html">ACERCA DE</a></li>
+                    <li><a href="como_publicar.html">COMO PUBLICAR</a></li>
+                    <li><a href="cuentas.html">CUENTAS</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </footer>
+    <script src="../js/styles.js"></script>
+    <script src="../js/busqueda.js"></script>
+</body>
 
 </html>
