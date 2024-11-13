@@ -1,3 +1,4 @@
+const direccion = "192.168.100.11";
 // Función para guardar el token en Local Storage
 function guardarToken(token) {
     localStorage.setItem('token', token);
@@ -45,7 +46,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://localhost:5000/auth/login', {
+        const response = await fetch(`http://${direccion}:5000/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -63,7 +64,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
         const rol = payload.rol;
 
         //guardar id de usuario en localstage
-        fetch('http://localhost:5000/auth', {
+        fetch(`http://${direccion}:5000/auth`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -128,7 +129,7 @@ function mostrarContenidoPorRol(rol) {
             contenido.innerHTML = ''
             contenidoProfesor.style.display = 'block';
             eliminarCuentaPropia.addEventListener('click', async () => {
-                const response = await fetch(`http://localhost:5000/auth/${obtenerId()}`, {
+                const response = await fetch(`http://${direccion}:5000/auth/${obtenerId()}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -159,7 +160,7 @@ function mostrarContenidoPorRol(rol) {
                 }
         
                 try {
-                    const response = await fetch(`http://localhost:5000/auth/${obtenerId()}`, {
+                    const response = await fetch(`http://${direccion}:5000/auth/${obtenerId()}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -199,7 +200,7 @@ function mostrarOpcionesInicioSesion() {
 // Función para mostrar la lista de cuentas
 async function mostrarCuentas() {
     try {
-        const response = await fetch('http://localhost:5000/auth', {
+        const response = await fetch(`http://${direccion}:5000/auth`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -238,7 +239,7 @@ document.getElementById('registro-cuenta').addEventListener('submit', async func
     const rol = document.getElementById('rol-nuevo').value;
 
     try {
-        const response = await fetch('http://localhost:5000/auth/registro', {
+        const response = await fetch(`http://${direccion}:5000/auth/registro`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -261,7 +262,7 @@ document.getElementById('registro-cuenta').addEventListener('submit', async func
 // Función para eliminar una cuenta
 async function eliminarCuenta(id) {
     try {
-        const response = await fetch(`http://localhost:5000/auth/${id}`, {
+        const response = await fetch(`http://${direccion}:5000/auth/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -325,7 +326,7 @@ function mostrarFormularioEditar(id, nombre, rol, botonEditar) {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/auth/${id}`, {
+            const response = await fetch(`http://${direccion}:5000/auth/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -358,7 +359,7 @@ function cerrarFormularioEditar() {
 // Función para mostrar la lista de proyectos
 async function mostrarProyectos() {
     try {
-        const response = await fetch('http://localhost:5000/proyectos', {
+        const response = await fetch(`http://${direccion}:5000/proyectos`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -426,7 +427,7 @@ document.getElementById('registro-proyecto').addEventListener('submit', async fu
             formData.append(key, datosProyecto[key]);
         }
 
-        const response = await fetch('http://localhost:5000/proyectos', {
+        const response = await fetch(`http://${direccion}:5000/proyectos`, {
             method: 'POST',
             headers: {
                 'x-auth-token': obtenerToken()
@@ -448,7 +449,7 @@ document.getElementById('registro-proyecto').addEventListener('submit', async fu
 // Función para eliminar un proyecto
 async function eliminarProyecto(id) {
     try {
-        const response = await fetch(`http://localhost:5000/proyectos/${id}`, {
+        const response = await fetch(`http://${direccion}:5000/proyectos/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -518,7 +519,7 @@ function mostrarFormularioEditarProyecto(id, botonEditar) {
                 formData.append(key, datosProyecto[key]);
             }
 
-            const response = await fetch(`http://localhost:5000/proyectos/${id}`, {
+            const response = await fetch(`http://${direccion}:5000/proyectos/${id}`, {
                 method: 'PUT',
                 headers: {
                     'x-auth-token': obtenerToken()

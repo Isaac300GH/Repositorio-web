@@ -29,6 +29,31 @@ const obtenerProyectos = async (req, res) => {
     }
 };
 
+// Obtener todos los proyectos por busqueda
+const obtenerProyectosBusqueda = async (req, res) => {
+    const query = req.query.search;
+
+    if (!query) {
+        return obtenerProyectos(req, res);
+    }
+
+    try {
+        const proyectos = await Proyecto.find({
+            $or: [
+                { titulo: new RegExp(query, 'i') },
+                { resumen: new RegExp(query, 'i') },
+                { palabrasClave: new RegExp(query, 'i') },
+                { autores: new RegExp(query, 'i') },
+                { tutores: new RegExp(query, 'i') },
+                { categorias: new RegExp(query, 'i') }
+            ]
+        });
+        res.json(proyectos);
+    } catch (error) {
+        res.status(500).json({ mensaje: error.message });
+    }
+};
+
 // Obtener un proyecto por id
 const obtenerProyecto = async (req, res) => {
     try {
@@ -65,6 +90,7 @@ const eliminarProyecto = async (req, res) => {
 module.exports = {
     crearProyecto,
     obtenerProyectos,
+    obtenerProyectosBusqueda,
     obtenerProyecto,
     actualizarProyecto,
     eliminarProyecto

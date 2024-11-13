@@ -2,6 +2,7 @@ const express = require('express');
 const {
     crearProyecto,
     obtenerProyectos,
+    obtenerProyectosBusqueda,
     obtenerProyecto,
     actualizarProyecto,
     eliminarProyecto
@@ -13,6 +14,9 @@ const router = express.Router();
 
 // Ruta para crear un proyecto (solo admin)
 router.post('/', protegerRuta, verificarRol(["admin"]), uploads.single('file'), crearProyecto);
+
+// En tu archivo de rutas del servidor
+router.get('/', obtenerProyectosBusqueda);
 
 // Ruta para obtener todos los proyectos (todos)
 router.get('/', obtenerProyectos);
